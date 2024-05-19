@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+
+{% extends 'home.html' %}
+{ % load static %}
+
+{% block main_content %}
+
+<div class="container-md" >
+<h1>List Booking</h1>
+
+      {% if booking %}
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Code</th>
+                  <th scope="col">DateTime</th>
+                  <th scope="col">Customer</th>
+                            <th scope="col"></th>
+
+                </tr>
+              </thead>
+              <tbody>
+                {% for b in booking %}
+                    <tr>
+                        <td>{{b.id}}</td>
+                        <th><a style="text-decoration: none" href="http://127.0.0.1:8000/ticket/payment_detail/{{b.id}}">{{b.code}}</a></th>
+                        <td>{{b.created_at}}</td>
+                        <td>{{b.customer}}</td>
+                        {% if b.booking_status == 'successful' %}
+                        <td>    <a href="/check_out/{{b.id}}" class="btn btn-sm btn-danger">Check-out</a> </td>
+                        {% endif %}
+                    </tr>
+
+                {% endfor %}
+              </tbody>
+            </table>
+      {% else %}
+
+  <p>Nothing found</p>
+  {% endif %}
+
+    <br>
+
+</div>
+
+{% endblock %}

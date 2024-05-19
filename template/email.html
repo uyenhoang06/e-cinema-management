@@ -1,0 +1,12 @@
+
+<!DOCTYPE html>
+<body>
+{% load static %}
+Hello {{user.username}},
+Please click the link below to activate your account
+
+{% block reset_link %}
+<a href="http://{{domain}}{% url 'emailActivate' uidb64=id token=token %}">Activate your account</a>
+{% endblock %}
+
+</body>

@@ -1,0 +1,117 @@
+<!-- booking.html -->
+<!DOCTYPE html>
+
+{% extends 'schedule.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block main_content %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'booking.css' %}">
+{% endblock %}
+
+<div class="booking-title">
+    <h1>Booking {{show.movie}}</h1>
+    <h5>Cinema: {{show.hall}}</h5>
+</div>
+
+<div class="container-fluid">
+    <div class="movie-screen">
+        <div class="screen" id="screen">
+            Screen
+        </div>
+    </div>
+    <form action="{% url 'booking:booking' show.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table class="seat-map">
+            {% for row in rows %}
+            {% list_item list_form row as list_form_row %}
+            <tr class="seat-row">
+                {% for col in cols %}
+                <td class="seat-cell">
+                    {% list_item list_form_row col as abc %}
+                    {% if abc %}
+                    {% if abc.status == 'available' %}
+                    <div class="seat {% if abc.type == 'standard' %}standard{% elif abc.type == 'vip' %}vip{% endif %} available"
+                        title="Click to select this seat">
+                        <input type="checkbox" name="seat" value="{{ abc.id }}" id="id_seat_{{ row }}_{{ col }}"
+                            class="seat-checkbox">
+                    </div>
+                    {% else %}
+                    <div class="seat unavailable" title="Seat is unavailable">
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="show-choice">
+            <ul class="showcase">
+
+                <li>
+                    <div class="seat"></div>
+                    <small>N/A</small>
+                </li>
+                <li>
+                    <div class="seat selected" title="Selected seat. Click to unselect"></div>
+                    <small>Selected</small>
+                </li>
+                <li>
+                    <div class="seat occupied" title="Seat is occupied"></div>
+                    <small>Occupied</small>
+                </li>
+            </ul>
+        </div>
+        <div class="button-submit">
+            <input type="submit" value="Continue" class="btn btn-success">
+        </div>
+    </form>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var checkboxes = document.querySelectorAll('.seat-checkbox');
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('change', function () {
+                var seat = this.parentElement;
+
+                if (seat.classList.contains('unavailable')) {
+                    // Display a pop-up message for unavailable seats
+                    alert("Seat is unavailable. Please choose another seat.");
+                    this.checked = false; // Uncheck the checkbox
+                } else {
+                    // Adjust background color based on seat type for available seats
+                    if (seat.classList.contains('standard')) {
+                        seat.style.backgroundColor = this.checked ? 'lightblue' : '#444451';
+                    } else if (seat.classList.contains('vip')) {
+                        seat.style.backgroundColor = this.checked ? 'lightcoral' : '#444451';
+                    }
+
+                    if (this.checked) {
+                        seat.classList.add('selected');
+                        seat.setAttribute('title', 'Selected seat. Click to unselect');
+                    } else {
+                        seat.classList.remove('selected');
+                        seat.setAttribute('title', 'Click to select this seat');
+                    }
+                }
+            });
+
+            if (checkbox.checked) {
+                var seat = checkbox.parentElement;
+                if (seat.classList.contains('standard')) {
+                    seat.style.backgroundColor = 'lightblue';
+                } else if (seat.classList.contains('vip')) {
+                    seat.style.backgroundColor = 'lightcoral';
+                }
+                seat.classList.add('selected');
+                seat.setAttribute('title', 'Selected seat. Click to unselect');
+            }
+        });
+    });
+</script>
+
+
+{% endblock %}

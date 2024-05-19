@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+{% extends 'ticket.html' %}
+{% load static %}
+
+{% block main_content %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'payment_detail.css' %}">
+{% endblock %}
+
+<div class="ticket-detail">
+    <h3>{{ booking.id }}</h3>
+    <p>Score: {{ booking.score }}</p>
+
+    <div class="ticket-list">
+        {% for t in ticket %}
+            <a href="/ticket_detail/{{ t.id }}">
+                <p>Ticket ID: {{ t.id }}</p>
+            </a>
+        {% endfor %}
+    </div>
+
+    <p>Status: {{ booking.booking_status }}</p>
+    <p>Code: {{ booking.code }}</p>
+</div>
+
+{% endblock %}

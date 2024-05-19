@@ -1,0 +1,21 @@
+{% extends 'schedule.html' %}
+{% load static %}
+
+{% block main_content %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'update_schedule.css' %}">
+{% endblock %}
+
+<div class="container">
+    <h1> Update Showtime </h1>
+
+    <div class="container-fluid">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit" class="btn btn-success">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

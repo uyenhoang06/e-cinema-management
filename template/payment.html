@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+{% extends 'booking.html' %}
+{% load static %}
+
+{% block main_content %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'payment.css' %}">
+{% endblock %}
+
+
+<div class="bill-check">
+    <form action="{% url 'booking:payment' booking.id %}" method='post' enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1> Bill</h1>
+        <div class="bill-infor">
+            <p>Customer: {{user}}</p>
+            <p>Booking Score: {{booking.score}}</p>
+            <p>User Score: {{user.score}}</p>
+            <p>Movie : {{showtime.movie}} </p>
+            <p>Hall : {{showtime.hall}}</p>
+            <p>Date : {{showtime.date}} </p>
+            <p>Time: {{showtime.start_time}} to {{showtime.end_time}}</p>
+            <p>Seat : </p>
+            {% for s in seats %}
+            <p>[{{s.type}}] {{s.row}} {{s.col}} </p>
+            {% endfor %}
+            <p>Price: {{normal_price}}</p>
+            <p>Created Time: {{booking.created_at}}</p>
+
+            {% if applied_discount %}
+            <p> Applies Discount: {{applied_discount}} </p>
+            <p>New Price: {{price}}</p>
+            {% endif %}
+
+            {% if score %}
+            <p>New Price Score: {{price}}</p>
+            {% endif %}
+            {{discount.as_p}}
+        </div>
+        <div class="bill-choice">
+            <input name="apply_discount" type="submit" value="Apply Discount" class="btn btn-success">
+            <input name="use_score" type="submit" value="Use Score" class="btn btn-success">
+            <input name="delete_score" type="submit" value="Delete Score" class="btn btn-success">
+            <input name="delete_discount" type="submit" value="Delete Discount" class="btn btn-success">
+
+            <input name="dat_ve" type="submit" value="Check Out" class="btn btn-success">
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

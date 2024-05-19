@@ -1,0 +1,129 @@
+.movie-theater {
+    padding: 20px;
+}
+
+.carousel-inner {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.carousel-item h2 {
+    text-transform: uppercase;
+    object-fit: cover;
+}
+
+.carousel-item video {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.carousel-caption {
+    text-align: center;
+}
+
+/* Movie section */
+
+.container-fluid {
+    position: relative;
+}
+
+.container-fluid h2 {
+    padding: 10px;
+}
+
+.btn-add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    background-color: #11246a;
+    color: #fff;
+    font-size: 15px;
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.button.hidden {
+    background-color: transparent;
+    border-color: #fff;
+}
+
+.button a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.card {
+    border: 1px solid #222225ce;
+    border-radius: 8px;
+    width: 18rem
+}
+
+.card img {
+    border-radius: 6px;
+    height: 400px;
+}
+
+.row {
+    width: 100%;
+    margin-top: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+}
+
+.card-container {
+    display: inline-block;
+    padding-left: 18px;
+    margin-bottom: 15px;
+}
+
+.card {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.row::-webkit-scrollbar {
+    display: none;
+}
+
+.container-fluid .bi-chevron-left,
+.bi-chevron-right {
+    position: absolute;
+    top: 50%;
+    left: 1%;
+    width: 35px;
+    height: 35px;
+    background: rgba(241, 240, 240, 0.398);
+    color: #11246a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s linear;
+    z-index: 999999999;
+    opacity: 0;
+}
+
+.container-fluid .bi-chevron-right {
+    left: unset;
+    right: 3%;
+}
+
+.container-fluid:hover .bi-chevron-right {
+    opacity: 1;
+}
+
+.container-fluid:hover .bi-chevron-left {
+    opacity: 1;
+}

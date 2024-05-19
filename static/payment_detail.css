@@ -1,0 +1,31 @@
+.ticket-detail {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+.ticket-detail h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.ticket-detail p {
+    margin-bottom: 10px;
+}
+
+.ticket-list a {
+    display: block;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: #495057;
+}
+
+.ticket-list a:hover {
+    background-color: #e9ecef;
+}

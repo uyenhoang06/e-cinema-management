@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+{% extends 'ticket.html' %}
+{% load static %}
+
+{% block main_content %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'ticket_detail.css' %}">
+{% endblock %}
+
+<div class="ticket-detail">
+    <h1>Ticket Details</h1>
+    <p>Ticket ID: {{ ticket.id }}</p>
+    <p>Showtime: {{ ticket.showtime }}</p>
+    <p>Seat Number: {{ ticket.seat.seat }}</p>
+    <p>Hall: {{ ticket.seat.showtime.hall }}</p>
+</div>
+
+{% endblock %}

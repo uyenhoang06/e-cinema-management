@@ -1,0 +1,42 @@
+.container{
+    margin-top: 20px;
+}
+
+.card {
+    border: none;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+input {
+    justify-content: center;
+    align-items: center;
+    background-color: #11246a;
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 25px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+input.hidden {
+    background-color: transparent;
+    border-color: #fff;
+}

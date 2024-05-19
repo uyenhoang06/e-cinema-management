@@ -1,0 +1,50 @@
+.container-md {
+    margin-top: 20px;
+}
+
+.row {
+    margin-top: 25px;
+}
+
+.card {
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 15rem;
+    height: 7rem;
+    align-items: center;
+    border: transparent;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+}
+
+.card p {
+    font-size: 2rem;
+    margin-top: 10px;
+}
+
+.btn-success {
+    margin-top: 10px;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.table .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+input[type="text"] {
+    background-color: #eee;
+    border: none;
+    border-radius: 8px;
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+}

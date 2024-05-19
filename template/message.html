@@ -1,0 +1,38 @@
+{% block css %}
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+{% endblock %}
+
+{% if messages %}
+	<div class="row">
+		<div class="col-md-12">
+			{% for message in messages %}
+			<div class="msg msg-{{ message.tags }}">
+				{% if message.tags == 'success' %}
+				<span class="glyphicon glyphicon-ok"></span>
+				{% elif message.tags == 'warning' %}
+				<span class="glyphicon glyphicon-exclamation-sign"></span>
+				{% elif message.tags == 'error' %}
+				<span class="glyphicon glyphicon-remove"></span>
+				{% else %}
+				<span class="glyphicon glyphicon-info-sign"></span>
+				{% endif %}
+				{{ message }}
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
+
+    <script>
+        $(document).ready(function() {
+            function hideMessages() {
+                $('.msg').fadeOut(1000); 
+            }
+            hideMessages();
+            $('.msg').fadeIn(1000, function() {
+                setTimeout(hideMessages, 5000); 
+            });
+        });
+    </script>

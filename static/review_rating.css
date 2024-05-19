@@ -1,0 +1,58 @@
+.review {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+h3 {
+    text-align: center;
+    color: #1c1e20;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+textarea,
+input[type="number"] {
+    background-color: #eee;
+    border: none;
+    border-radius: 8px;
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+}
+
+
+.rating-submit {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    background-color: #2868a7;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #000000;
+}

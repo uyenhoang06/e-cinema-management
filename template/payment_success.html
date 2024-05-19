@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+
+{% extends 'booking.html' %}
+{% load static %}
+
+{% block main_content %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'payment_success.css' %}">
+{% endblock %}
+<div class="container">
+    <h2>Payment Success</h2>
+    <p>{{booking.code}}</p>
+</div>
+{% endblock %}

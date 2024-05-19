@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'ticket.css' %}">
+{% endblock %}
+
+<div class="ticket-page">
+    <h1>Ticket Page</h1>
+    <h5>User: {{ user.username }}</h5>
+
+    <div class="booking-section">
+        <h2 class="section-title">On Going</h2>
+        {% for b in ongoing_booking %}
+            <div class="booking-item">
+                <a href="payment/{{ b.id }}">
+                    <p>Booking ID: {{ b.id }}</p>
+                </a>
+                <a href="ticket/delete_ticket/{{ b.id }}" class="btn btn-sm btn-danger">Delete</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="booking-section">
+        <h2 class="section-title">Success</h2>
+        {% for b in success_booking %}
+            <div class="booking-item">
+                <a href="ticket/payment_detail/{{ b.id }}">
+                    <p>Booking ID: {{ b.id }}</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+{% extends 'profile.html' %}
+{% load static %}
+
+{% block main_content %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'update_profile.css' %}">
+{% endblock %}
+<div class="update_section">
+    <h1> Update Profile </h1>
+
+    <div class="container-fluid">
+        <form action="{% url 'account:update_profile' user.id %}" method=POST enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="update-submit">
+            <input type="submit" value="Submit" class="btn btn-success"></div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

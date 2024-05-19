@@ -1,0 +1,121 @@
+.content {
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+.single {
+    display: flex;
+}
+
+.detail {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info {
+    flex: 1;
+    padding: 90px;
+}
+
+.poster {
+    max-width: 100%;
+    max-height: 500px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 40px;
+}
+
+h3 {
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+h5 {
+    margin-top: 20px;
+}
+
+p {
+    margin: 10px 0;
+}
+
+.infor h5 {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.infor h5 i {
+    background: rgb(180, 180, 138);
+    margin-right: 3px;
+}
+
+a {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
+button {
+    background-color: #11246a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #000000;
+}
+
+.review {
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.review h3 {
+    border-bottom: 2px solid #123d6c;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.review-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.review-item {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #fff;
+}
+
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rating {
+    color: #15569b;
+}
+
+.review-text {
+    margin-top: 10px;
+}

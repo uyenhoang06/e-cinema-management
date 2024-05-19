@@ -1,0 +1,98 @@
+<!doctype html>
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main_content %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'film.css' %}">
+{% endblock %}
+
+{% if perms.movie.add_movie %}
+<!--{{request.session.add_movie}}-->
+<div class="btn-add">
+    <button class="button">
+        <a href="/add_film"> Add Film </a>
+    </button>
+</div>
+{% endif %}
+
+{% if messages %}
+	<div class="roww">
+		<div class="col-md-12">
+			{% for message in messages %}
+			<div class="msg msg-{{ message.tags }}">
+				{% if message.tags == 'success' %}
+				<span class="glyphicon glyphicon-ok"></span>
+				{% elif message.tags == 'warning' %}
+				<span class="glyphicon glyphicon-exclamation-sign"></span>
+				{% elif message.tags == 'error' %}
+				<span class="glyphicon glyphicon-remove"></span>
+				{% else %}
+				<span class="glyphicon glyphicon-info-sign"></span>
+				{% endif %}
+				{{ message }}
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endif %}
+
+<div class="container-fluid">
+
+    <h2>Now Booking</h2>
+    <i class="bi bi-chevron-left"></i>
+    <i class="bi bi-chevron-right"></i>
+
+    <div class="row">
+        <div class="card-container">
+            {% for movie in movies_now %}
+            <div class="card">
+                <a href="film/{{movie.id}}">
+                    <img src="{{ movie.poster.url }}" class="card-img-top" alt="{{movie.title}}">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{movie.title}}</h5>
+                    <p class="card-text">{{movie.duration}}</p>
+                    {% if perms.movie.change_movie %}
+                    <a href="/update_film/{{movie.id}}" class="btn btn-sm btn-warning">Update</a>
+                    <a href="/delete_film/{{movie.id}}" class="btn btn-sm btn-danger">Delete</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <h2>Coming Soon</h2>
+    <i class="bi bi-chevron-left"></i>
+    <i class="bi bi-chevron-right"></i>
+
+    <div class="row">
+        <div class="card-container">
+            {% for movie in movies_soon %}
+            <div class="card">
+                <a href="film/{{movie.id}}">
+                    <img src="{{ movie.poster.url }}" class="card-img-top" alt="{{movie.title}}">
+                </a>
+
+                <div class="card-body">
+                    <h5 class="card-title">{{movie.title}}</h5>
+                    <p class="card-text">{{movie.duration}}</p>
+                    {% if perms.movie.change_movie %}
+                    <a href="/update_film/{{movie.id}}" class="btn btn-sm btn-warning">Update</a>
+                    <a href="/delete_film/{{movie.id}}" class="btn btn-sm btn-danger">Delete</a>
+                    {% endif %}
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

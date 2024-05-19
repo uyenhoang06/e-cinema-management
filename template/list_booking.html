@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+
+{% extends 'home.html' %}
+{% load static %}
+
+{% block main_content %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'list_booking.css' %}">
+{% endblock %}
+
+
+<div class="container-md">
+
+<h1>List Booking</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <h3>Booking Today</h3>
+                    <p style="font-size: 50px">{{count_today}}</p>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <h3>Booking Month</h3>
+                    <p style="font-size: 50px">{{count_month}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div>
+        <form action = "{% url 'booking:search_result' %}" method='post' enctype="multipart/form-data">
+              {% csrf_token %}
+          {{search.as_p}}
+          <input name="search" type="submit" value="Search" class="btn btn-success">
+        </form>
+    </div>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Code</th>
+      <th scope="col">DateTime</th>
+      <th scope="col">Cusomer</th>
+        <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for b in booking %}
+        <tr>
+            <td>{{b.id}}</td>
+            <th><a style="text-decoration: none" href="ticket/payment_detail/{{b.id}}">{{b.code}}</a></th>
+            <td>{{b.created_at}}</td>
+            <td>{{b.customer}}</td>
+            {% if b.booking_status == 'successful' %}
+            <td>    <a href="/check_out/{{b.id}}" class="btn btn-sm btn-danger">Check-out</a> </td>
+            {% endif %}
+        </tr>
+
+    {% endfor %}
+
+  </tbody>
+</table>
+
+</div>
+
+
+
+{% endblock %}

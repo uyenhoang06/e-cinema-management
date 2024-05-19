@@ -1,0 +1,66 @@
+{% extends 'film.html' %}
+{% load custom_filters %}
+{% load static %}
+
+{% block main_content %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+{% endblock %}
+
+<section class="movie-theater">
+    {% if movies %}
+    <div class="container">
+        <div id="movieCarousel" class="carousel slide w-100" data-bs-ride="carousel" data-bs-interval="2500">
+            <div class="carousel-inner">
+                {% for movie in movies %}
+                {% if movie.trailer %}
+                <div class="carousel-item {{ forloop.first|yesno:'active,' }}">
+                    <a href="detail/{{ movie.id }}">
+                        <video class="d-block w-100" src="{{ movie.trailer.url }}"
+                            alt="{{ movie.title }}" autoplay muted loop> </video></a>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2>{{ movie.title }}</h2>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" data-bs-target="#movieCarousel" type="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" data-bs-target="#movieCarousel" type="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    {% endif %}
+</section>
+
+<div class="container-fluid">
+    <h2>Film</h2>
+    <i class="bi bi-chevron-left"></i>
+    <i class="bi bi-chevron-right"></i>
+
+    <div class="row">
+        <div class="card-container">
+            {% for movie in movies %}
+            <div class="card">
+                <a href="film/{{movie.id}}">
+                    <img src="{{ movie.poster.url }}" class="card-img-top" alt="{{movie.title}}">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{movie.title}}</h5>
+                    <p class="card-text">{{movie.duration}}</p>
+                    {% if perms.movie.change_movie %}
+                    <a href="/update_film/{{movie.id}}" class="btn btn-sm btn-warning">Update</a>
+                    <a href="/delete_film/{{movie.id}}" class="btn btn-sm btn-danger">Delete</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

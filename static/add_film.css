@@ -1,0 +1,39 @@
+.add-film {
+    max-width: 700px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+.add-film h1 {
+    display: flex;
+    justify-content: center;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.add-submit {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-success {
+    background-color: #286ca7;
+    color: #fff;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #020402;
+}

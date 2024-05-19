@@ -1,0 +1,45 @@
+<!doctype html>
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main_content %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}">
+{% endblock %}
+<div class="user-button">
+    <a href="/update_profile/{{user.id}}" class="btn">Update</a>
+    <a href="/change_password" class="btn">Change Password</a>
+</div>
+<div class="profile-section">
+    <h2>Profile: {{user.username}}</h2>
+    <div class="profile-info">
+        <div class="profile-image">
+            <img src="{{user.avatar.url}}" alt="Profile Picture">
+        </div>
+        <div class="user-details">
+            <h5>Name: {{user.first_name}} {{user.last_name}}</h5>
+            <p>Address: {{user.address}}</p>
+            <p>Phone: {{user.phone}}</p>
+            <p>Birthday: {{user.birthday}}</p>
+            <p>Score: {{user.score}}</p>
+            <p>Membership: {{user.membership}}</p>
+        </div>
+    </div>
+
+    <h5>Reviews</h5>
+    <ul class="review-list">
+        {% for r in review %}
+        <li class="review-item">
+            <div class="movie-info">
+                <strong>{{r.movie}}</strong>
+                <span class="rating">Rating: {{r.rating}}<i class="bi bi-star-fill"></i></span>
+            </div>
+            <p class="review-text">{{r.review}}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

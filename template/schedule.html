@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main_content %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'schedule.css' %}">
+{% endblock %}
+
+<h1>Showtime Page</h1>
+<div class="btn-show">
+    {% if perms.cinemaa.add_showtime %}
+    <a href="/add_showtime">
+        <button>Add Showtime</button>
+    </a>
+</div>
+{% endif %}
+<div class="mess">
+{% if messages %}
+	<div class="row">
+		<div class="col-md-12">
+			{% for message in messages %}
+			<div class="msg msg-{{ message.tags }}">
+				{% if message.tags == 'success' %}
+				<span class="glyphicon glyphicon-ok"></span>
+				{% elif message.tags == 'warning' %}
+				<span class="glyphicon glyphicon-exclamation-sign"></span>
+				{% elif message.tags == 'error' %}
+				<span class="glyphicon glyphicon-remove"></span>
+				{% else %}
+				<span class="glyphicon glyphicon-info-sign"></span>
+				{% endif %}
+				{{ message }}
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
+</div>
+
+<div class="show-day">
+    <div class="title">
+        <h2>{{today}}</h2>
+    </div>
+    <div class="show-container">
+        {% for show in showtime_today %}
+        <div class="show-block">
+            <h4>{{show.movie}}</h4>
+            {% if show.movie.poster %}
+            <img src="{{ show.movie.poster.url }}" alt="{{ show.movie }}" class="movie-poster">
+            {% endif %}
+            {% for time in show.showtime %}
+            <div class="btn-container">
+                {% if perms.booking.add_booking %}
+                <a href="/book_showtime/{{time.id}}" class="btn">{{time.start_time}} - {{time.end_time}}</a>
+                {% else %}
+                <button class="btn">{{time.start_time}} - {{time.end_time}}</button>
+                {% endif %}
+                {% if perms.cinemaa.change_showtime %}
+                <a href="/update_showtime/{{time.id}}" class="btn btn-sm btn-warning">Update</a>
+                <a href="/delete_showtime/{{time.id}}" class="btn btn-sm btn-danger">Delete</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+<br>
+
+<div class="show-day">
+    <div class="title">
+        <h2>{{next1}}</h2>
+    </div>
+    <div class="show-container">
+        {% for show in showtime_next1 %}
+        <div class="show-block">
+            <h4>{{show.movie}}</h4>
+            {% if show.movie.poster %}
+            <img src="{{ show.movie.poster.url }}" alt="{{ show.movie }}" class="movie-poster">
+            {% endif %}
+            {% for time in show.showtime %}
+            <div class="btn-container">
+                {% if perms.booking.add_booking %}
+                <a href="/book_showtime/{{time.id}}" class="btn">{{time.start_time}} - {{time.end_time}}</a>
+                {% else %}
+                <button class="btn">{{time.start_time}} - {{time.end_time}}</button>
+                {% endif %}
+                {% if perms.cinemaa.change_showtime %}
+                <a href="/update_showtime/{{time.id}}" class="btn btn-sm btn-warning">Update</a>
+                <a href="/delete_showtime/{{time.id}}" class="btn btn-sm btn-danger">Delete</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+
+<div class="show-day">
+    <div class="title">
+        <h2>{{next2}}</h2>
+    </div>
+    <div class="show-container">
+        {% for show in showtime_next2 %}
+        <div class="show-block">
+            <h4>{{show.movie}}</h4>
+            {% if show.movie.poster %}
+            <img src="{{ show.movie.poster.url }}" alt="{{ show.movie }}" class="movie-poster">
+            {% endif %}
+            {% for time in show.showtime %}
+            <div class="btn-container">
+                {% if perms.booking.add_booking %}
+                <a href="/book_showtime/{{time.id}}" class="btn">{{time.start_time}} - {{time.end_time}}</a>
+                {% else %}
+                <button class="btn">{{time.start_time}} - {{time.end_time}}</button>
+                {% endif %}
+                {% if perms.cinemaa.change_showtime %}
+                <a href="/update_showtime/{{time.id}}" class="btn btn-sm btn-warning">Update</a>
+                <a href="/delete_showtime/{{time.id}}" class="btn btn-sm btn-danger">Delete</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+
+<div class="show-day">
+    <div class="title">
+        <h2>{{next3}}</h2>
+    </div>
+
+    <div class="show-container">
+        {% for show in showtime_next3 %}
+        <div class="show-block">
+            <h4>{{show.movie}}</h4>
+            {% if show.movie.poster %}
+            <img src="{{ show.movie.poster.url }}" alt="{{ show.movie }}" class="movie-poster">
+            {% endif %}
+            {% for time in show.showtime %}
+            <div class="btn-container">
+                {% if perms.booking.add_booking %}
+                <a href="/book_showtime/{{time.id}}" class="btn">{{time.start_time}} - {{time.end_time}}</a>
+                {% else %}
+                <button class="btn">{{time.start_time}} - {{time.end_time}}</button>
+                {% endif %}
+                {% if perms.cinemaa.change_showtime %}
+                <a href="/update_showtime/{{time.id}}" class="btn btn-sm btn-warning">Update</a>
+                <a href="/delete_showtime/{{time.id}}" class="btn btn-sm btn-danger">Delete</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+
+<div class="show-day">
+    <div class="title">
+        <h2>{{next4}}</h2>
+    </div>
+
+    <div class="show-container">
+        {% for show in showtime_next4 %}
+        <div class="show-block">
+            <h4>{{show.movie}}</h4>
+            {% if show.movie.poster %}
+            <img src="{{ show.movie.poster.url }}" alt="{{ show.movie }}" class="movie-poster">
+            {% endif %}
+            {% for time in show.showtime %}
+            <div class="btn-container">
+                {% if perms.booking.add_booking %}
+                <a href="/book_showtime/{{time.id}}" class="btn">{{time.start_time}} - {{time.end_time}}</a>
+                {% else %}
+                <button class="btn">{{time.start_time}} - {{time.end_time}}</button>
+                {% endif %}
+                {% if perms.cinemaa.change_showtime %}
+                <a href="/update_showtime/{{time.id}}" class="btn btn-sm btn-warning">Update</a>
+                <a href="/delete_showtime/{{time.id}}" class="btn btn-sm btn-danger">Delete</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+
+<div class="show-day">
+    <div class="title">
+        <h2>{{next5}}</h2>
+    </div>
+
+    <div class="show-container">
+        {% for show in showtime_next5 %}
+        <div class="show-block">
+
+            <h4>{{show.movie}}</h4>
+            {% if show.movie.poster %}
+            <img src="{{ show.movie.poster.url }}" alt="{{ show.movie }}" class="movie-poster">
+            {% endif %}
+            {% for time in show.showtime %}
+            <div class="btn-container">
+                {% if perms.booking.add_booking %}
+                <a href="/book_showtime/{{time.id}}" class="btn">{{time.start_time}} - {{time.end_time}}</a>
+                {% else %}
+                <button class="btn">{{time.start_time}} - {{time.end_time}}</button>
+                {% endif %}
+                {% if perms.cinemaa.change_showtime %}
+                <a href="/update_showtime/{{time.id}}" class="btn btn-sm btn-warning">Update</a>
+                <a href="/delete_showtime/{{time.id}}" class="btn btn-sm btn-danger">Delete</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

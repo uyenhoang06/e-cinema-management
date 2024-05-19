@@ -1,0 +1,46 @@
+<!doctype html>
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main_content %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'movie_detail.css' %}">
+{% endblock %}
+<main class="content">
+    <div class="single">
+        <section class="detail">
+            <img src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster" class="poster">
+        </section>
+        <section class="info">
+            <h1>{{ movie.title }}</h1>
+            <p>
+            <h5><span>Description: </span></h5>
+            {{ movie.description }}</p>
+            <h5><span>Rating: </span><i class="bi bi-star-fill"></i> {{ movie.rating }}</h5>
+        </section>
+    </div>
+</main>
+
+<a href="{{ movie.id }}/review_rating">
+    <button> Add a comment </button>
+</a>
+
+<div class="review">
+    <h3>Reviews</h3>
+    <div class="review-list">
+        {% for review in reviews %}
+        <div class="review-item">
+            <div class="user-info">
+                <h5>{{ review.user }}</h5>
+                <p class="rating">Rating: </span><i class="bi bi-star-fill"></i> {{ review.rating }}</p>
+            </div>
+            <p class="review-text">{{ review.review }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

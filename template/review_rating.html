@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'review_rating.css' %}">
+{% endblock %}
+<div class="review">
+    <h3> Rating {{movie.title}} </h3>
+    <form method="POST" class="form-group">
+        {% csrf_token %}
+        {{ form }}
+        <div class="rating-submit"><button type="submit" class="btn btn-success">Submit</button></div>
+    </form>
+</div>
+
+{% endblock %}

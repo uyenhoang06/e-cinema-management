@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+{% extends 'home.html' %}
+
+{% load static %}
+
+{% block main_content %}
+<!-- {% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'sale_chart.css' %}">
+{% endblock %} -->
+<html lang="en">
+
+<head>
+  <title>Statistics</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous">
+    </script>
+  <link rel="stylesheet" href="{% static 'sale_chart.css' %}">
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css">
+</head>
+
+<body>
+  <!--  Sale by day/week/month -->
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <div class="card" style="width: 15rem;height: 7rem; align-items: center">
+          <h3>Sale Today</h3>
+          <p style="font-size: 50px">{{sale_today}}</p>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card" style="width: 15rem;height: 7rem; align-items: center">
+          <h3>Sale Month</h3>
+          <p style="font-size: 50px">{{sale_month}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  User  -->
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <div class="card" style="width: 15rem;height: 7rem; align-items: center">
+          <h3>Customer</h3>
+          <p style="font-size: 50px">{{num_customer}}</p>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card" style="width: 15rem;height: 7rem; align-items: center">
+          <h3>Schedule Staff</h3>
+          <p style="font-size: 50px">{{num_schedule_staff}}</p>
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div class="card" style="width: 15rem;height: 7rem; align-items: center">
+          <h3>Ticket Staff</h3>
+          <p style="font-size: 50px">{{num_ticket_staff}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  Doanh thu hang nam -->
+  <div class="title">
+    <h4> Sale Income </h4>
+  </div>
+  <div class="container">
+    <form id="filterForm">
+      <label for="year">Choose a year:</label>
+      <select name="year" id="year"></select>
+      <input type="submit" value="Load" name="_load">
+    </form>
+    <div class="row">
+      <div class="col">
+        <canvas id="salesChart"></canvas>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          url: "/chart/filter-option/",
+          type: "GET",
+          dataType: "json",
+          success: (jsonResponse) => {
+            // Load all the options
+            jsonResponse.options.forEach(option => {
+              $("#year").append(new Option(option, option));
+            });
+            // Load data for the first option
+            loadAllCharts($("#year").children().first().val());
+          },
+          error: () => console.log("Failed to fetch chart filter options!")
+        });
+      });
+
+      $("#filterForm").on("submit", (event) => {
+        event.preventDefault();
+
+        const year = $("#year").val();
+        loadAllCharts(year)
+      });
+
+      function loadChart(chart, endpoint) {
+        $.ajax({
+          url: endpoint,
+          type: "GET",
+          dataType: "json",
+          success: (jsonResponse) => {
+            // Extract data from the response
+            const title = jsonResponse.title;
+            const labels = jsonResponse.data.labels;
+            const datasets = jsonResponse.data.datasets;
+
+            // Reset the current chart
+            chart.data.datasets = [];
+            chart.data.labels = [];
+
+            // Load new data into the chart
+            chart.options.title.text = title;
+            chart.options.title.display = true;
+            chart.data.labels = labels;
+            datasets.forEach(dataset => {
+              chart.data.datasets.push(dataset);
+            });
+            chart.update();
+          },
+          error: () => console.log("Failed to fetch chart data from " + endpoint + "!")
+        });
+      }
+
+      function loadAllCharts(year) {
+        loadChart(salesChart, `/chart/sales/${year}/`);
+      }
+
+
+      let salesCtx = document.getElementById("salesChart").getContext("2d");
+      let salesChart = new Chart(salesCtx, {
+        type: "bar",
+        options: {
+          responsive: true,
+          title: {
+            display: true,
+            text: ""
+          }
+        }
+      });
+    </script>
+  </div>
+
+
+  <!-- Sale by Film -->
+  <div style="padding: 60px;"">
+    <div class="title">
+      <h2> Sale by Film</h2>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Film</th>
+          <th scope="col">Sale</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for key, value in sale_film.items %}
+        <tr>
+          <td>{{key}}</td>
+          <td>{{value}}</td>
+        </tr>
+
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+
+
+
+</body>
+
+</html>
+
+{% endblock %}
